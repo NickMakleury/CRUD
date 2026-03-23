@@ -32,8 +32,6 @@ $users = $stmt->fetchAll();
         <div class="bg-glow bg-glow-1"></div>
         <div class="bg-glow bg-glow-2"></div>
 
-        <div class="gti-waves"></div>
-
         <div class="course-visual">
             <img src="" alt="" class="course-logo" id="courseLogo">
         </div>
