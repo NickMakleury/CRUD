@@ -1,0 +1,70 @@
+body.theme-odontologia .bg-glow,
+body.theme-odontologia .odontologia-waves {
+  opacity: 0;
+}
+
+body.theme-odontologia .odontologia-waves {
+    position: absolute;
+    right: -160px;
+    bottom: -140px;
+    width: 800px;
+    height: 500px;
+    border-radius: 50%;
+    transform: rotate(-10deg);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+body.theme-odontologia.course-preview-active .course-logo {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  animation: floatingLogo 4.6s ease-in-out infinite;
+}
+
+body.theme-odontologia .course-logo {
+    filter: drop-shadow(0 0 25px rgba(80, 60, 255, 0.15));
+}
+
+body.theme-odontologia {
+  --bg-main: linear-gradient(135deg, #940000 0%, #800000 45%, #4e0000 100%);
+  --card-bg: rgba(255, 255, 255, 0.14);
+  --card-border: rgba(255, 255, 255, 0.18);
+  --input-bg: rgba(255, 255, 255, 0.12);
+  --input-border: rgba(255, 255, 255, 0.12);
+  --button-bg: #6d7cff;
+  --button-hover: #5969f0;
+  --text-main: #ffffff;
+  --text-soft: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+body.theme-odontologia .field-group select {
+    color: #ffffff;
+}
+
+body.theme-odontologia .field-group select option {
+    color: #222222;
+    background: #ffffff;
+}
+
+body.theme-odontologia {
+    background-attachment: fixed;
+}
+
+body.theme-odontologia .students-table td a[href*="edit"] {
+    color: #7dd3fc;
+}
+
+body.theme-odontologia .students-table td a[href*="delete"] {
+    color: #fda4af;
+}
+
+body.theme-odontologia .students-table td a[href*="edit"]:visited,
+body.theme-odontologia .students-table td a[href*="delete"]:visited {
+    color: inherit;
+}
+
+body.theme-odontologia input::placeholder,
+body.theme-odontologia textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}

@@ -70,20 +70,20 @@ class User
      *
      * @param string $name
      * @param string $email
-     * @param string $document
+     * @param string $course
      * @return bool
      */
-    public function create(string $name, string $email, string $document): bool
+    public function create(string $name, string $email, string $course): bool
     {
         $stmt = $this->pdo->prepare("
-            INSERT INTO users (name, email, document)
-            VALUES (:name, :email, :document)
+            INSERT INTO users (name, email, course)
+            VALUES (:name, :email, :course)
         ");
 
         return $stmt->execute([
             ":name" => $name,
             ":email" => $email,
-            ":document" => $document
+            ":course" => $course
         ]);
     }
 
@@ -93,16 +93,16 @@ class User
      * @param int $id
      * @param string $name
      * @param string $email
-     * @param string $document
+     * @param string $course
      * @return bool
      */
-    public function update(int $id, string $name, string $email, string $document): bool
+    public function update(int $id, string $name, string $email, string $course): bool
     {
         $stmt = $this->pdo->prepare("
             UPDATE users
             SET name = :name,
                 email = :email,
-                document = :document
+                course = :course
             WHERE id = :id
         ");
 
@@ -110,7 +110,7 @@ class User
             ":id" => $id,
             ":name" => $name,
             ":email" => $email,
-            ":document" => $document
+            ":course" => $course
         ]);
     }
 
