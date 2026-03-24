@@ -15,13 +15,13 @@ require __DIR__ . "/connect.php";
  */
 $name = trim($_POST["name"] ?? "");
 $email = trim($_POST["email"] ?? "");
-$document = trim($_POST["document"] ?? "");
+$course = trim($_POST["course"] ?? "");
 
 /**
  * Validação básica:
  * se qualquer campo estiver vazio, a execução é interrompida.
  */
-if ($name === "" || $email === "" || $document === "") {
+if ($name === "" || $email === "" || $course === "") {
     die("Preencha todos os campos.");
 }
 
@@ -37,8 +37,8 @@ $pdo = Connect::getInstance();
  * pois ajuda a evitar SQL Injection.
  */
 $stmt = $pdo->prepare("
-    INSERT INTO users (name, email, document)
-    VALUES (:name, :email, :document)
+    INSERT INTO users (name, email, course)
+    VALUES (:name, :email, :course)
 ");
 
 /**
@@ -48,7 +48,7 @@ $stmt = $pdo->prepare("
 $stmt->execute([
     ":name" => $name,
     ":email" => $email,
-    ":document" => $document
+    ":course" => $course
 ]);
 
 /**

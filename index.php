@@ -1,33 +1,9 @@
 <?php
-
-/**
- * Inclui o arquivo de conexão com o banco de dados.
- *
- * __DIR__ retorna o diretório atual do arquivo,
- * o que evita problemas de caminho relativo.
- */
 require __DIR__ . "/connect.php";
 
-/**
- * Obtém a instância da conexão com o banco.
- * Esse método foi definido na classe Connect.
- */
 $pdo = Connect::getInstance();
-
-/**
- * Executa uma consulta SQL para buscar todos os usuários
- * da tabela "users", ordenando pelo campo "id" em ordem crescente.
- *
- * query() é usado quando não há parâmetros dinâmicos.
- */
 $stmt = $pdo->query("SELECT * FROM users ORDER BY id ASC");
-
-/**
- * fetchAll() busca todos os registros retornados pela consulta
- * e os armazena em um array.
- */
 $users = $stmt->fetchAll();
-
 ?>
 
 <!DOCTYPE html>
@@ -35,99 +11,88 @@ $users = $stmt->fetchAll();
 
 <head>
     <meta charset="UTF-8">
-    <title>CRUD PHP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/themes/gti.css">
+    <link rel="stylesheet" href="assets/css/themes/contabeis.css">
+    <link rel="stylesheet" href="assets/css/themes/direito.css">
+    <link rel="stylesheet" href="assets/css/themes/enfermagem.css">
+    <link rel="stylesheet" href="assets/css/themes/fisio.css">
+    <link rel="stylesheet" href="assets/css/themes/nutricao.css">
+    <link rel="stylesheet" href="assets/css/themes/odonto.css">
+    <link rel="stylesheet" href="assets/css/themes/pedagogia.css">
+    <link rel="stylesheet" href="assets/css/themes/psico.css">
+    <link rel="stylesheet" href="assets/css/themes/vet.css">
 </head>
 
-<body>
+<body class="theme-default">
 
-    <h1>Cadastro de Alunos</h1>
+    <div class="course-background">
+        <div class="bg-glow bg-glow-1"></div>
+        <div class="bg-glow bg-glow-2"></div>
 
-    <!--
-        Formulário responsável por enviar os dados
-        para o arquivo store.php, que fará o cadastro no banco.
-        
-        method="post" é usado para envio de dados de formulário
-        de forma mais apropriada e segura do que GET.
-    -->
-    <form action="store.php" method="post">
-        <p>
-            <label>Nome:</label><br>
-            <input type="text" name="nomecompleto" required>
-        </p>
+        <div class="course-visual">
+            <img src="" alt="" class="course-logo" id="courseLogo">
+        </div>
+    </div>
 
-        <p>
-            <label>E-mail:</label><br>
-            <input type="email" name="email" required>
-        </p>
+    <main class="page">
+        <section class="register-shell">
+            <div class="register-card">
+                <div class="window-top">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
 
-        <p>
-            <label>Curso:</label><br>
-            <input type="text" name="document" required>
-        </p>
+                <div class="register-header">
+                    <div>
+                        <p class="eyebrow">Painel acadêmico</p>
+                        <h1>Cadastro de Alunos</h1>
+                        <p class="subtitle">Preencha os dados do aluno e selecione o curso para finalizar cadastrp.</p>
+                    </div>
 
-        <button type="submit">Cadastrar</button>
-    </form>
+                    <a href="students.php" class="access-btn" id="accessBtn">Acessar</a>
+                </div>
 
-    <hr>
+                <form action="store.php" method="post" class="register-form">
+                    <div class="field-group">
+                        <label for="name">Nome</label>
+                        <input type="text" name="name" id="name" placeholder="Digite o nome do aluno" required>
+                    </div>
 
-    <h2>Lista de alunos</h2>
+                    <div class="field-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email" placeholder="Digite o e-mail" required>
+                    </div>
 
-    <!--
-        Tabela que exibe os alunos cadastrados no banco de dados.
-        O atributo cellpadding adiciona espaçamento interno nas células.
-    -->
-    <table cellpadding="10">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Curso</th>
-                <th>Cadastrado em</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!--
-                foreach percorre todos os usuários retornados do banco.
-                A cada repetição, a variável $user representa um aluno.
-            -->
-            <?php foreach ($users as $user) : ?>
-                <tr>
-                    <td><?= $user["id"] ?></td>
-                    <td><?= $user["name"] ?></td>
-                    <td><?= $user["email"] ?></td>
-                    <td><?= $user["document"] ?></td>
-                    <td><?= date("d/m/Y H:i", strtotime($user["created_at"])) ?></td>
-                    <td>
-                        <!--
-                            Link para editar o aluno.
-                            O ID é enviado pela URL para que o arquivo edit.php
-                            saiba qual registro deve ser alterado.
-                        -->
-                        <a href="edit.php?id=<?= $user["id"] ?>">Editar</a> |
+                    <div class="field-group select-field">
+                        <label for="course">Curso</label>
+                        <select name="course" id="course" required>
+                            <option value="">Selecione o curso</option>
+                            <option value="contabeis">Ciências Contábeis</option>
+                            <option value="direito">Direito</option>
+                            <option value="enfermagem">Enfermagem</option>
+                            <option value="fisioterapia">Fisioterapia</option>
+                            <option value="gti">GTI</option>
+                            <option value="veterinaria">Veterinária</option>
+                            <option value="nutricao">Nutrição</option>
+                            <option value="odontologia">Odontologia</option>
+                            <option value="pedagogia">Pedagogia</option>
+                            <option value="psicologia">Psicologia</option>
+                        </select>
+                    </div>
 
-                        <!--
-                            Link para excluir o aluno.
-                            O onclick chama uma confirmação em JavaScript
-                            antes de seguir para a exclusão.
-                        -->
-                        <a href="delete.php?id=<?= $user["id"] ?>" onclick="return confirm('Tem certeza que deseja excluir este aluno?')">Excluir</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <!--
-                    colspan="6" faz a célula ocupar as 6 colunas da tabela.
-                    count($users) conta quantos alunos existem no array.
-                -->
-                <td colspan="6">Total de alunos: <?= count($users) ?></td>
-            </tr>
-        </tfoot>
-    </table>
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
 
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

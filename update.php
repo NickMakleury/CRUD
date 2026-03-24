@@ -19,14 +19,14 @@ $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
  */
 $name = trim($_POST["name"] ?? "");
 $email = trim($_POST["email"] ?? "");
-$document = trim($_POST["document"] ?? "");
+$course = trim($_POST["course"] ?? "");
 
 /**
  * Validação básica:
  * - o ID precisa ser válido
  * - nome, e-mail e curso não podem estar vazios
  */
-if (!$id || $name === "" || $email === "" || $document === "") {
+if (!$id || $name === "" || $email === "" || $course === "") {
     die("Dados inválidos.");
 }
 
@@ -42,7 +42,7 @@ $pdo = Connect::getInstance();
  */
 $stmt = $pdo->prepare("
     UPDATE users
-    SET name = :name, email = :email, document = :document
+    SET name = :name, email = :email, course = :course
     WHERE id = :id
 ");
 
@@ -54,14 +54,14 @@ $stmt->execute([
     ":id" => $id,
     ":name" => $name,
     ":email" => $email,
-    ":document" => $document
+    ":course" => $course
 ]);
 
 /**
- * Redireciona o usuário para a página principal
+ * Redireciona o usuário para a página de alunos cadastrados
  * após a atualização.
  */
-header("Location: index.php");
+header("Location: students.php?success=updated");
 
 /**
  * Encerra a execução do script.

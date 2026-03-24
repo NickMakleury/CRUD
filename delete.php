@@ -43,7 +43,7 @@ $stmt->execute([
  * Redireciona o usuário de volta para a página principal
  * após a exclusão.
  */
-header("Location: index.php");
+header("Location: students.php?success=deleted");
 
 /**
  * Encerra a execução do script.
